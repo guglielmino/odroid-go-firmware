@@ -3,6 +3,10 @@ language: bash
 os:
   - linux
 
+branches:
+  only:
+  - master
+
 addons:
   apt:
     packages:
@@ -40,3 +44,10 @@ script:
   - make defconfig
   # Build project from the git repository
   - make
+
+deploy:
+      provider: releases
+      api_key: $GITHUB_OAUTH_TOKEN
+      file: "build/odroid-go-firmware.bin"
+      skip_cleanup: true
+
